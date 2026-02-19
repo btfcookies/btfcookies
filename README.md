@@ -21,6 +21,8 @@ I mainly use Unity C#, although I have experience in most languages in the C fam
   **Languages**: C++, JavaScript, Python
 
   **Web**: HTML, CSS
+  
+  **Learning**: Lua (for Roblox Studio)
 
 ***
 ⚙️ **Experience & Focus**
