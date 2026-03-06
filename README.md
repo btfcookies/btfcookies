@@ -1,3 +1,4 @@
+[![Discord Presence](https://lanyard.cnrad.dev/api/1283880493288263752)](https://discord.com/users/YOUR_DISCORD_ID)
 ***
 **👋 Hi, I’m Cookiemonster**
 
