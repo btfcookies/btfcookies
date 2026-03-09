@@ -15,15 +15,15 @@ I’m an independent game developer who mainly works with Unity. I have been a l
 * [ProtoReader](https://protoreader.netlify.app/) - a quiz bowl practice website
 ***
 🛠️ **What I Work With** <br>
-I mainly use Unity C#, although I have experience in most languages in the C family.
+I mainly use Luau, although I have experience in most languages in the C family.
 
-  **Game Dev**: Unity, C#
+  **Game Dev**: Roblox Luau (a version of Lua), Unity, C#
 
   **Languages**: C++, JavaScript, Python
 
   **Web**: HTML, CSS
   
-  **Learning**: Lua (for Roblox Studio)
+  
 
 ***
 ⚙️ **Experience & Focus**
