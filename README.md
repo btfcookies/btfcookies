@@ -11,7 +11,7 @@ I’m an independent game developer who mainly works with Unity. I have been a l
 
 🎮 **Projects**
 
-* BTF 2 _[In Development]_— a successor to BTF that will be made in Roblox
+* [BTF 2](https://btf2.netlify.app/)— a successor to BTF that will be made in Roblox
 * [QB Reader](https://github.com/qbreader/website) - a quiz bowl practice website that I did not create but have started actively commiting to
 * [BTF Vibe Edition](https://btf-vibe.netlify.app/public/index.html) — experimental gameplay and balance-driven iteration
 * [BTF OG Edition](https://btf-online.netlify.app/) — original release of BTF that established the core mechanics and vision
