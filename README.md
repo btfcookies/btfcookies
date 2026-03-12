@@ -1,4 +1,4 @@
-[![Discord Presence](https://lanyard.cnrad.dev/api/1283880493288263752)](https://discord.com/users/1283880493288263752)
+[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=btfcookies&show_icons=true&theme=radical)](https://github.com/btfcookies)
 ***
 **👋 Hi, I’m Cookiemonster**
 
