@@ -1,4 +1,4 @@
-[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=btfcookies&show_icons=true&theme=radical)](https://github.com/btfcookies)
+[![GitHub Stats](https://ghstats.dev/api/card?username=btfcookies&theme=ocean)](https://github.com/rowkav09/GitHub-profile-stats)
 ***
 **👋 Hi, I’m Cookiemonster**
 
