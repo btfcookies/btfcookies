@@ -7,7 +7,7 @@
 ![Lua](https://img.shields.io/badge/Lua-2C2D72?style=for-the-badge&logo=lua&logoColor=white)
 ![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
 
-I’m an independent game developer who mainly works with Unity. I have been a lead developer at [Eightbit Games](https://eightbit-games.netlify.app/) for 3 years.
+I’m an independent game developer who mainly works with Roblox Studio. I have been a lead developer at [Eightbit Games](https://eightbit-games.netlify.app/) for 3 years.
 
 🎮 **Projects**
 
