@@ -3,9 +3,6 @@
 **👋 Hi, I’m Cookiemonster**
 
 ***Indie Game Dev · Head Developer of Eightbit Games***<br>
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Lua](https://img.shields.io/badge/Lua-2C2D72?style=for-the-badge&logo=lua&logoColor=white)
-![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
 
 I’m an independent game developer who mainly works with Roblox Studio. I have been a lead developer at [Eightbit Games](https://eightbit-games.netlify.app/) for 3 years.
 
@@ -16,6 +13,7 @@ I’m an independent game developer who mainly works with Roblox Studio. I have 
 * [BTF Vibe Edition](https://btf-vibe.netlify.app/public/index.html) — experimental gameplay and balance-driven iteration
 * [BTF OG Edition](https://btf-online.netlify.app/) — original release of BTF that established the core mechanics and vision
 * [ProtoReader](https://protoreader.netlify.app/) - a quiz bowl practice website
+* [Zep](https://github.com/wbrous/zep) - a multi-purpose Discord bot 
 ***
 🛠️ **What I Work With** <br>
 I mainly use Luau, although I have experience in most languages in the C family.
@@ -24,7 +22,7 @@ I mainly use Luau, although I have experience in most languages in the C family.
 
   **Languages**: C++, JavaScript, Python
 
-  **Web**: HTML, CSS
+  **Web**: HTML, CSS, TypeScript
   
   
 
