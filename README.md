@@ -16,13 +16,15 @@ I’m an independent game developer who mainly works with Roblox Studio. I have 
 * [Zep](https://github.com/wbrous/zep) - a multi-purpose Discord bot 
 ***
 🛠️ **What I Work With** <br>
-I mainly use Luau, although I have experience in most languages in the C family.
+I have learned a wide variety of languages, from web dev to neural networks to Roblox Studio.
 
   **Game Dev**: Roblox Luau (a version of Lua), Unity, C#
 
   **Languages**: C++, JavaScript, Python
 
   **Web**: HTML, CSS, TypeScript
+
+  **ML**: Python, Jupyter Notebook, Pandas
   
   
 
@@ -38,6 +40,10 @@ I mainly use Luau, although I have experience in most languages in the C family.
 * Refactoring projects when tech stacks stop scaling
 
 * Prototyping, testing, and iterating based on real limitations
+
+* Machine Learning
+
+* Professional-looking websites for companies
 
 I am currently focused on BTF 2, prioritizing stability, structure, and polish over rushed releases.
 
