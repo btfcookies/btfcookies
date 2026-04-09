@@ -13,7 +13,8 @@ I’m an independent game developer who mainly works with Roblox Studio. I have 
 * [BTF Vibe Edition](https://btf-vibe.netlify.app/public/index.html) — experimental gameplay and balance-driven iteration
 * [BTF OG Edition](https://btf-online.netlify.app/) — original release of BTF that established the core mechanics and vision
 * [ProtoReader](https://protoreader.netlify.app/) - a quiz bowl practice website
-* [Zep](https://github.com/wbrous/zep) - a multi-purpose Discord bot 
+* [Zep](https://github.com/wbrous/zep) - a multi-purpose Discord bot
+* [Peg](https://github.com/btfcookies/peg) - a roguelike plinko game
 ***
 🛠️ **What I Work With** <br>
 I have learned a wide variety of languages, from web dev to neural networks to Roblox Studio.
