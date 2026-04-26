@@ -2,11 +2,11 @@
 ***
 **👋 Hi, I’m Cookiemonster**
 
-***Indie Game Dev · Head Developer of Eightbit Games***<br>
+***Full Stack Dev · Head Developer at Eightbit Labs***<br>
 
-I’m an independent game developer who mainly works with Roblox Studio. I have been a lead developer at [Eightbit Games](https://eightbit-games.netlify.app/) for 3 years.
+I’m an full stack developer who mainly works with Typescript and web dev. I have been a lead developer at [Eightbit Labs](https://eightbitlabs.netlify.app/) for 3 years.
 
-🎮 **Projects**
+**Projects
 
 * [BTF 2](https://btf2.netlify.app/)— a successor to BTF that will be made in Roblox
 * [QB Reader](https://github.com/qbreader/website) - a quiz bowl practice website that I did not create but have started actively commiting to
@@ -15,6 +15,7 @@ I’m an independent game developer who mainly works with Roblox Studio. I have 
 * [ProtoReader](https://protoreader.netlify.app/) - a quiz bowl practice website
 * [Zep](https://github.com/wbrous/zep) - a multi-purpose Discord bot
 * [Peg](https://github.com/btfcookies/peg) - a roguelike plinko game
+* [Cortis]() - a cutting edge messaging app made for developers
 ***
 🛠️ **What I Work With** <br>
 I have learned a wide variety of languages, from web dev to neural networks to Roblox Studio.
