@@ -53,4 +53,4 @@ I am currently focused on BTF 2, prioritizing stability, structure, and polish o
 **Contact and Collaboration** <br>
 Email: lawrencetong1030@gmail.com <br>
 Discord: btf_cookies
-[](https://komarev.com/ghpvc/?username=btfcookies)
+![Profile Views](https://komarev.com/ghpvc/?username=btfcookies&color=blue)
