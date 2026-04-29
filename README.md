@@ -6,7 +6,7 @@
 
 I’m an full stack developer who mainly works with Typescript and web dev. I have been a lead developer at [Eightbit Labs](https://eightbitlabs.netlify.app/) for 3 years.
 
-**Projects
+**Projects**
 
 * [BTF 2](https://btf2.netlify.app/)— a successor to BTF that will be made in Roblox
 * [QB Reader](https://github.com/qbreader/website) - a quiz bowl practice website that I did not create but have started actively commiting to
@@ -17,7 +17,7 @@ I’m an full stack developer who mainly works with Typescript and web dev. I ha
 * [Peg](https://github.com/btfcookies/peg) - a roguelike plinko game
 * [Cortis]() - a cutting edge messaging app made for developers
 ***
-🛠️ **What I Work With** <br>
+ **What I Work With** <br>
 I have learned a wide variety of languages, from web dev to neural networks to Roblox Studio.
 
   **Game Dev**: Roblox Luau (a version of Lua), Unity, C#
@@ -31,7 +31,7 @@ I have learned a wide variety of languages, from web dev to neural networks to R
   
 
 ***
-⚙️ **Experience & Focus**
+ **Experience & Focus**
 
 * Multiplayer systems & server-side experimentation
 
@@ -50,7 +50,7 @@ I have learned a wide variety of languages, from web dev to neural networks to R
 I am currently focused on BTF 2, prioritizing stability, structure, and polish over rushed releases.
 
 ***
-✉️ **Contact and Collaboration** <br>
+**Contact and Collaboration** <br>
 Email: lawrencetong1030@gmail.com <br>
 Discord: btf_cookies
 [](https://komarev.com/ghpvc/?username=btfcookies)
