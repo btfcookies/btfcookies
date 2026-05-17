@@ -2,7 +2,7 @@
 ***
 **👋 Hi, I’m Cookiemonster**
 
-***Full Stack Dev · Head Developer at Eightbit Labs***<br>
+***Frontend Dev · Head Developer at Eightbit Labs***<br>
 
 I’m an full stack developer who mainly works with Typescript and web dev. I have been a lead developer at [Eightbit Labs](https://eightbitlabs.netlify.app/) for 3 years.
 
