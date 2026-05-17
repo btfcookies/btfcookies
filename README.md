@@ -2,13 +2,10 @@
 ***
 **👋 Hi, I’m Cookiemonster**
 
-***Frontend Dev · Head Developer at Eightbit Labs***<br>
-
-I’m an full stack developer who mainly works with Typescript and web dev. I have been a lead developer at [Eightbit Labs](https://eightbitlabs.netlify.app/) for 3 years.
+I’m an frontend dev who mainly works with Typescript and web dev. I have been a lead developer at [Eightbit Labs](https://eightbitlabs.netlify.app/) for 3 years.
 
 **Projects**
 * [QB Reader](https://github.com/qbreader/website) - a quiz bowl practice website that I did not create but have started actively commiting to
-* [ProtoReader](https://protoreader.netlify.app/) - a quiz bowl practice website
 * [Zep](https://github.com/wbrous/zep) - a multi-purpose Discord bot
 * [Cortis]() - a cutting edge messaging app made for developers
 * [Orbis](https://orbis-dev.netlify.app/) - a set of Discord bots made to streamline the developer workflow
