@@ -11,7 +11,7 @@ I’m an frontend dev who mainly works with Typescript and web dev. I have been 
 * [Orbis](https://orbis-dev.netlify.app/) - a set of Discord bots made to streamline the developer workflow
 ***
 **Tech Stack** <br>
-[![My Skills](https://skillicons.dev/icons?i=ts,js,html,css,react,nextjs,nodejs,py,mongodb,cs,lua,cpp,vim)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=ts,js,html,css,react,nextjs,nodejs,py,mongodb,cs,lua,cpp,vim,bun,npm,vite,raspberrypi,pytorch,netlify,matlab,discordjs)](https://skillicons.dev)
 
 ***
 **Contact and Collaboration** <br>
