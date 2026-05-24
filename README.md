@@ -5,6 +5,7 @@
 I’m an frontend dev who mainly works with Typescript and web dev. I have been a lead developer at [Eightbit Labs](https://eightbitlabs.netlify.app/) for 3 years.
 
 **Projects**
+* [TAD Coin](https://tad-coin.netlify.app/) - a cryptocurrency dedicated to Terry A. Davis
 * [QB Reader](https://github.com/qbreader/website) - a quiz bowl practice website that I did not create but have started actively commiting to
 * [Zep](https://github.com/wbrous/zep) - a multi-purpose Discord bot
 * [Cortis]() - a cutting edge messaging app made for developers
