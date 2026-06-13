@@ -1,8 +1,8 @@
 [![GitHub Stats](https://ghstats.dev/api/card?username=btfcookies&theme=ocean)](https://github.com/rowkav09/GitHub-profile-stats)
 ***
-**👋 Hi, I’m Cookiemonster**
+**👋 Hello there!**
 
-I’m an frontend dev who mainly works with Typescript and web dev. I have been a lead developer at [Eightbit Labs](https://eightbitlabs.netlify.app/) for 3 years.
+I’m Cookiemonster, a frontend dev who mainly works with Typescript and web dev. I have been a lead developer at [Eightbit Labs](https://eightbitlabs.netlify.app/) for 3 years.
 
 **Projects**
 * [TAD Coin](https://tad-coin.netlify.app/) - a cryptocurrency dedicated to Terry A. Davis
