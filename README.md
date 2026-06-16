@@ -6,7 +6,7 @@ I’m Cookiemonster, a frontend dev who mainly works with Typescript and web dev
 
 **Projects**
 * [TAD Coin](https://tad-coin.netlify.app/) - a cryptocurrency dedicated to Terry A. Davis
-* [QB Reader](https://github.com/qbreader/website) - a quiz bowl practice website that I did not create but have started actively commiting to
+* [QB Reader](https://github.com/qbreader/website) - a quiz bowl practice website
 * [Zep](https://github.com/wbrous/zep) - a multi-purpose Discord bot
 * [Cortis]() - a cutting edge messaging app made for developers
 * [Orbis](https://orbis-dev.netlify.app/) - a set of Discord bots made to streamline the developer workflow
