@@ -14,15 +14,15 @@ I'm **Cookiemonster** — a frontend developer specializing in TypeScript and mo
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=btfcookies&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" height="175em" />
+<img src="https://github-readme-stats.vercel.app/api?username=btfcookies&show_icons=true&theme=dark&hide_border=true&count_private=true" height="175em" />
 &nbsp;&nbsp;
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=btfcookies&layout=compact&theme=tokyonight&hide_border=true&langs_count=8" height="175em" />
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=btfcookies&layout=compact&theme=dark&hide_border=true&langs_count=8" height="175em" />
 
 </div>
 
 <div align="center">
 
-[![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=btfcookies&theme=tokyo-night&hide_border=true&area=true)](https://github.com/ashutosh00710/github-readme-activity-graph)
+[![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=btfcookies&theme=dark&hide_border=true&area=true)](https://github.com/ashutosh00710/github-readme-activity-graph)
 
 </div>
 
