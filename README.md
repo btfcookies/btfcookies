@@ -1,18 +1,16 @@
 <div align="center">
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=70A5FD&center=true&vCenter=true&width=600&lines=Hey%2C+I'm+Cookiemonster+%F0%9F%91%8B;Frontend+Dev+%7C+TypeScript+%26+Web;Lead+Dev+%40+Eightbit+Labs)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=70A5FD&center=true&vCenter=true&width=600&lines=hello+there!;i%27m+cookiemonster;Frontend+Dev+%7C+TypeScript+%26+Web)](https://git.io/typing-svg)
 
 </div>
 
 ---
 
-### 👋 About Me
+### About Me
 
 I'm **Cookiemonster** — a frontend developer specializing in TypeScript and modern web development. Lead developer at [Eightbit Labs](https://eightbitlabs.netlify.app/) for 3 years.
 
 ---
-
-###  GitHub Stats
 
 <div align="center">
 
@@ -52,7 +50,7 @@ I'm **Cookiemonster** — a frontend developer specializing in TypeScript and mo
 
 ---
 
-### Contact
+### Contact 
 
 <div align="center">
 
