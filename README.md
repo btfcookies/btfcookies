@@ -1,6 +1,6 @@
 <div align="center">
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=000000&center=true&vCenter=true&width=600&lines=hello+there!;i%27m+cookiemonster;Frontend+Dev+%7C+TypeScript+%26+Web)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=ffffff&center=true&vCenter=true&width=600&lines=hello+there!;i%27m+cookiemonster;Frontend+Dev+%7C+TypeScript+%26+Web)](https://git.io/typing-svg)
 
 </div>
 
@@ -16,7 +16,7 @@ I'm **Cookiemonster** — a frontend developer specializing in TypeScript and mo
 
 <img src="https://streak-stats.demolab.com?user=btfcookies&theme=black-ice&hide_border=true" height="175em" />
 &nbsp;&nbsp;
-<img src="https://github-readme-stats-one-bice.vercel.app/api/top-langs/?username=btfcookies&layout=compact&theme=black-ice&hide_border=true&langs_count=8" height="175em" />
+<img src="https://github-readme-stats-one-bice.vercel.app/api/top-langs/?username=btfcookies&layout=compact&theme=dark&hide_border=true&langs_count=8" height="175em" />
 
 </div>
 
