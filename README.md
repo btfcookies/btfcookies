@@ -8,7 +8,7 @@
 
 ### About Me
 
-I'm **Cookiemonster** — a frontend developer specializing in TypeScript and modern web development. Lead developer at [Eightbit Labs](https://eightbitlabs.netlify.app/) for 3 years.
+I'm **Cookiemonster**, a frontend developer specializing in TypeScript and modern web development. I've been a lead developer at [Eightbit Labs](https://eightbitlabs.netlify.app/) for 3 years.
 
 ---
 
