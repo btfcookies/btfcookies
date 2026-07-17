@@ -32,6 +32,7 @@ I'm **Cookiemonster**, a frontend developer specializing in TypeScript and moder
 
 | Project | Description |
 |---------|-------------|
+| [Reamus](https://reamus.app/) | A free API to turn HTML into PDFs |
 | [TAD Coin](https://tad-coin.netlify.app/) | A cryptocurrency dedicated to Terry A. Davis |
 | [QB Reader](https://github.com/qbreader/website) | A quiz bowl practice website |
 | [Zep](https://github.com/wbrous/zep) | A multi-purpose Discord bot |
