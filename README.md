@@ -55,7 +55,7 @@ I'm **Cookiemonster**, a frontend developer specializing in TypeScript and moder
 
 <div align="center">
 
-[![Email](https://img.shields.io/badge/Email-lawrencetong1030%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:lawrencetong1030@gmail.com)
+[![Email](https://img.shields.io/badge/Email-lawrence@reamus.app-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:lawrence@reamus.app)
 &nbsp;
 [![Discord](https://img.shields.io/badge/Discord-btf__cookies-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/)
 
