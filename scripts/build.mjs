@@ -19,7 +19,9 @@ import { renderHeader } from './svg/header.mjs';
 import { renderContributions } from './svg/contributions.mjs';
 import { renderStats } from './svg/stats.mjs';
 import { renderLanguages } from './svg/languages.mjs';
-import { USER, HEADER, RASTER_SETTINGS } from './content.mjs';
+import { renderProjects } from './svg/projects.mjs';
+import { renderColophon } from './svg/colophon.mjs';
+import { USER, HEADER, RASTER_SETTINGS, PROJECTS, COLOPHON } from './content.mjs';
 
 const OUT = 'assets';
 const SNAPSHOT = 'data/snapshot.json';
@@ -88,6 +90,8 @@ async function main() {
     ['contributions', (theme, index) => renderContributions({ theme, days, streaks, index })],
     ['stats', (theme, index) => renderStats({ theme, days, streaks, profile, repos, index })],
     ['languages', (theme, index) => renderLanguages({ theme, repos, index })],
+    ['projects', (theme, index) => renderProjects({ theme, content: PROJECTS, index })],
+    ['colophon', (theme, index) => renderColophon({ theme, content: COLOPHON, index })],
   ];
 
   for (const theme of Object.values(THEMES)) {

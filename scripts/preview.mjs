@@ -4,13 +4,15 @@
  */
 import { readdirSync, writeFileSync } from 'node:fs';
 
-const order = ['header', 'contributions', 'stats', 'languages'];
+const order = ['header', 'contributions', 'stats', 'languages', 'projects', 'colophon'];
 const files = readdirSync('assets').filter((f) => f.endsWith('.svg'));
 const only = process.argv[2];
 const themes = ['light', 'dark'].filter((t) => !only || t === only);
+const wanted = process.argv.slice(3);
+const sheets = wanted.length > 0 ? order.filter((n) => wanted.includes(n)) : order;
 
 function sheetsFor(theme) {
-  return order
+  return sheets
     .map((name) => files.find((f) => f === `${name}-${theme}.svg`))
     .filter(Boolean)
     .map((f) => `<img src="../assets/${f}" alt="${f}">`)

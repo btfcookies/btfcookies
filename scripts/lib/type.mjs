@@ -55,7 +55,7 @@ const COMMAND_ARGS = {
  * the rendered glyph run - an SVG path stops drawing at its first parse error.
  * Writing the commands out directly avoids that and keeps the output compact.
  */
-function serialize(path, decimals = 2) {
+function serialize(path, decimals = 1) {
   const out = [];
   for (const cmd of path.commands) {
     const args = COMMAND_ARGS[cmd.type];
