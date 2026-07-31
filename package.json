@@ -1,0 +1,23 @@
+{
+  "name": "btfcookies-profile",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Generates the monochrome sheets rendered in the GitHub profile README.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/btfcookies/btfcookies.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/build.mjs && node scripts/preview.mjs"
+  },
+  "dependencies": {
+    "opentype.js": "^2.0.0",
+    "pngjs": "^7.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

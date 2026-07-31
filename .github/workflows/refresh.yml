@@ -1,0 +1,51 @@
+name: Refresh profile sheets
+
+on:
+  schedule:
+    # 06:10 UTC daily. Off the hour, because scheduled runs cluster on it.
+    - cron: '10 6 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/**'
+      - 'fonts/**'
+      - 'avatar.png'
+      - '.github/workflows/refresh.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-sheets
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Generate sheets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/build.mjs
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- assets data avatar.png; then
+            echo "sheets unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets data avatar.png
+          git commit -m "chore: refresh profile sheets"
+          git push

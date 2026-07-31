@@ -1,0 +1,7 @@
+node_modules/
+
+# Dev-only review artefacts produced by scripts/preview.mjs and scripts/shot.ps1
+scripts/preview.html
+preview.html
+*.png
+!avatar.png
