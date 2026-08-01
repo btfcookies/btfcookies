@@ -8,14 +8,14 @@
  */
 
 import { textPath, face, num } from '../lib/type.mjs';
-import { doc, revealDefs, revealCss, scanBar } from '../lib/svg.mjs';
+import { doc, revealDefs, revealCss, scanBar, SHEET } from '../lib/svg.mjs';
 import { percent } from '../lib/format.mjs';
 
-const W = 1200;
-const H = 246;
-const MARGIN = 60;
-const BAR = { y: 76, height: 58, gap: 2 };
-const LEGEND = { top: 178, rowHeight: 30, columns: 3, swatch: 14 };
+const W = SHEET.width;
+const H = 194;
+const MARGIN = SHEET.margin;
+const BAR = { y: 62, height: 48, gap: 2 };
+const LEGEND = { top: 148, rowHeight: 28, columns: 3, swatch: 13 };
 
 const MAX_SEGMENTS = 6;
 const MIN_SHARE = 0.01;
@@ -83,16 +83,16 @@ export function renderLanguages({ theme, repos, index = 0 }) {
         font: monoBold,
         text: segment.name,
         size: 12,
-        track: 1.4,
-        x: x + LEGEND.swatch + 12,
+        track: 1,
+        x: x + LEGEND.swatch + 10,
         y,
       });
       const share = textPath({
         font: mono,
         text: percent(segment.share, 1),
         size: 12,
-        track: 1.4,
-        x: x + (barWidth / LEGEND.columns) - 24,
+        track: 1,
+        x: x + (barWidth / LEGEND.columns) - 20,
         y,
         anchor: 'end',
       });
@@ -102,20 +102,20 @@ export function renderLanguages({ theme, repos, index = 0 }) {
 
   const eyebrow = textPath({
     font: mono,
-    text: `LANGUAGE DISTRIBUTION — BY BYTES ACROSS ${repos.repoCount} REPOSITORIES`,
-    size: 12,
-    track: 3.4,
+    text: `LANGUAGE DISTRIBUTION — ${repos.repoCount} REPOSITORIES BY BYTES`,
+    size: 11,
+    track: 2.4,
     x: MARGIN,
-    y: 46,
+    y: 40,
   });
 
   const caption = textPath({
     font: mono,
     text: 'FILL PATTERN REPLACES COLOUR',
     size: 10,
-    track: 1.6,
+    track: 1.2,
     x: W - MARGIN,
-    y: 46,
+    y: 40,
     anchor: 'end',
   });
 
@@ -126,7 +126,6 @@ export function renderLanguages({ theme, repos, index = 0 }) {
   }
 
   const svgBody = `<defs>${defs}${revealDefs(W, H)}</defs>
-<rect width="${W}" height="${H}" fill="${theme.paper}"/>
 <g mask="url(#print-mask)">
   <path d="${eyebrow.d}" fill="${theme.graphite}"/>
   <path d="${caption.d}" fill="${theme.ash}"/>

@@ -8,18 +8,20 @@
  */
 
 import { textPath, face, measure } from '../lib/type.mjs';
-import { doc, revealDefs, revealCss, scanBar, rule } from '../lib/svg.mjs';
+import { doc, revealDefs, revealCss, scanBar, rule, SHEET } from '../lib/svg.mjs';
 
-const W = 1200;
-const MARGIN = 60;
-const HEAD = 78;
-const ROW_HEIGHT = 46;
-const FOOT = 34;
+const W = SHEET.width;
+const MARGIN = SHEET.margin;
+const HEAD = 64;
+const ROW_HEIGHT = 40;
+const FOOT = 26;
 
 const NAME_X = MARGIN;
-const BLURB_X = 268;
+const BLURB_X = 178;
 const URL_RIGHT = W - MARGIN;
-const BLURB_LIMIT = 600;
+const BLURB_SIZE = 14;
+/** Blurb runs from its column to the widest address, less a gutter. */
+const BLURB_LIMIT = 400;
 
 export function renderProjects({ theme, content, index = 0 }) {
   const mono = face.mono();
@@ -29,7 +31,7 @@ export function renderProjects({ theme, content, index = 0 }) {
   const H = HEAD + content.rows.length * ROW_HEIGHT + FOOT;
 
   const overlong = content.rows.filter(
-    (row) => measure({ font: body, text: row.blurb, size: 15 }) > BLURB_LIMIT
+    (row) => measure({ font: body, text: row.blurb, size: BLURB_SIZE }) > BLURB_LIMIT
   );
   if (overlong.length > 0) {
     throw new Error(`project blurb too long: ${overlong.map((r) => r.name).join(', ')}`);
@@ -38,51 +40,56 @@ export function renderProjects({ theme, content, index = 0 }) {
   const eyebrow = textPath({
     font: mono,
     text: content.eyebrow,
-    size: 12,
-    track: 3.4,
+    size: 11,
+    track: 2.4,
     x: MARGIN,
-    y: 46,
+    y: 40,
   });
 
   const count = textPath({
     font: mono,
     text: `${content.rows.length} ENTRIES`,
     size: 10,
-    track: 2,
+    track: 1.6,
     x: URL_RIGHT,
-    y: 46,
+    y: 40,
     anchor: 'end',
   });
 
   const rows = content.rows
     .map((row, i) => {
       const top = HEAD + i * ROW_HEIGHT;
-      const baseline = top + 28;
+      const baseline = top + 25;
 
       const name = textPath({
         font: monoBold,
         text: row.name,
-        size: 14,
-        track: 2.2,
+        size: 13,
+        track: 1.6,
         x: NAME_X,
         y: baseline,
       });
       const blurb = textPath({
         font: body,
         text: row.blurb,
-        size: 15,
+        size: BLURB_SIZE,
         x: BLURB_X,
         y: baseline,
       });
       const url = textPath({
         font: mono,
         text: row.url,
-        size: 11,
-        track: 1.2,
+        size: 10.5,
+        track: 0.6,
         x: URL_RIGHT,
         y: baseline,
         anchor: 'end',
       });
+
+      // Blurb and address share the row; a collision would print one over the other.
+      if (blurb.x + blurb.width + 24 > url.x) {
+        throw new Error(`project row "${row.name}" collides with its address`);
+      }
 
       const divider = i === 0 ? '' : rule(MARGIN, top, W - MARGIN, theme);
       return `${divider}<path d="${name.d}" fill="${theme.ink}"/><path d="${blurb.d}" fill="${theme.graphite}"/><path d="${url.d}" fill="${theme.ash}"/>`;
@@ -90,7 +97,6 @@ export function renderProjects({ theme, content, index = 0 }) {
     .join('\n  ');
 
   const svgBody = `<defs>${revealDefs(W, H)}</defs>
-<rect width="${W}" height="${H}" fill="${theme.paper}"/>
 <g mask="url(#print-mask)">
   <path d="${eyebrow.d}" fill="${theme.graphite}"/>
   <path d="${count.d}" fill="${theme.ash}"/>

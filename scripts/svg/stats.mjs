@@ -6,16 +6,17 @@
  */
 
 import { textPath, face } from '../lib/type.mjs';
-import { doc, revealDefs, revealCss, scanBar, rule } from '../lib/svg.mjs';
+import { doc, revealDefs, revealCss, scanBar, rule, SHEET } from '../lib/svg.mjs';
 import { longDate, monthYear, group, percent } from '../lib/format.mjs';
 
-const W = 1200;
-const H = 216;
-const MARGIN = 60;
+const W = SHEET.width;
+const H = 186;
+const MARGIN = SHEET.margin;
 const CELLS = 4;
 
-const BASELINE = { label: 52, value: 116, note: 142, footer: 194 };
-const DIVIDER = { top: 34, bottom: 156 };
+const BASELINE = { label: 42, value: 100, note: 122, footer: 168 };
+const DIVIDER = { top: 26, bottom: 134 };
+const VALUE_SIZE = 46;
 
 function lastActiveDate(days) {
   for (let i = days.length - 1; i >= 0; i--) {
@@ -34,18 +35,18 @@ function buildCells({ days, streaks, profile, repos }) {
         streaks.current > 0
           ? `DAYS · ONGOING`
           : lastActive
-            ? `DAYS · LAST ACTIVE ${longDate(lastActive)}`
+            ? `DAYS · LAST ${longDate(lastActive)}`
             : 'DAYS',
     },
     {
       label: 'LONGEST STREAK',
       value: group(streaks.longest),
-      note: `DAYS · ENDED ${longDate(streaks.longestEnd)}`,
+      note: `DAYS · TO ${longDate(streaks.longestEnd)}`,
     },
     {
       label: 'CONTRIBUTIONS',
       value: group(streaks.total),
-      note: 'IN THE LAST 12 MONTHS',
+      note: 'LAST 12 MONTHS',
     },
     {
       label: 'ACTIVE DAYS',
@@ -63,20 +64,21 @@ export function renderStats({ theme, days, streaks, profile, repos, index = 0 })
   const mono = face.mono();
   const cells = buildCells({ days, streaks, profile, repos });
 
+  const cellWidth = (W - MARGIN * 2) / CELLS;
   const body = cells
     .map((cell) => {
       const label = textPath({
         font: mono,
         text: cell.label,
-        size: 11,
-        track: 3,
+        size: 10.5,
+        track: 2,
         x: cell.x,
         y: BASELINE.label,
       });
       const value = textPath({
         font: display,
         text: cell.value,
-        size: 52,
+        size: VALUE_SIZE,
         track: -0.5,
         x: cell.x,
         y: BASELINE.value,
@@ -84,11 +86,17 @@ export function renderStats({ theme, days, streaks, profile, repos, index = 0 })
       const note = textPath({
         font: mono,
         text: cell.note,
-        size: 10,
-        track: 1.4,
+        size: 9.5,
+        track: 0.9,
         x: cell.x,
         y: BASELINE.note,
       });
+      // The cells are a fixed four-up grid, so anything wider than its column
+      // collides with the divider rather than reflowing.
+      const widest = Math.max(label.width, value.width, note.width);
+      if (widest > cellWidth - 24) {
+        throw new Error(`stats cell "${cell.label}" overflows: ${widest.toFixed(0)}px of ${cellWidth - 24}px`);
+      }
       return `<path d="${label.d}" fill="${theme.graphite}"/><path d="${value.d}" fill="${theme.ink}"/><path d="${note.d}" fill="${theme.ash}"/>`;
     })
     .join('\n  ');
@@ -97,30 +105,29 @@ export function renderStats({ theme, days, streaks, profile, repos, index = 0 })
     .slice(1)
     .map(
       (cell) =>
-        `<rect x="${cell.x - 24}" y="${DIVIDER.top}" width="1" height="${DIVIDER.bottom - DIVIDER.top}" fill="${theme.rule}"/>`
+        `<rect x="${cell.x - 16}" y="${DIVIDER.top}" width="1" height="${DIVIDER.bottom - DIVIDER.top}" fill="${theme.rule}"/>`
     )
     .join('');
 
   const footerText = [
     `${repos.repoCount} PUBLIC REPOSITORIES`,
     `${profile.followers} FOLLOWERS`,
-    `ON GITHUB SINCE ${monthYear(profile.createdAt)}`,
+    `SINCE ${monthYear(profile.createdAt)}`,
   ].join('   ·   ');
   const footer = textPath({
     font: mono,
     text: footerText,
-    size: 11,
-    track: 2.2,
+    size: 10.5,
+    track: 1.8,
     x: MARGIN,
     y: BASELINE.footer,
   });
 
   const svgBody = `<defs>${revealDefs(W, H)}</defs>
-<rect width="${W}" height="${H}" fill="${theme.paper}"/>
 <g mask="url(#print-mask)">
   ${body}
   ${dividers}
-  ${rule(MARGIN, 170, W - MARGIN, theme)}
+  ${rule(MARGIN, 148, W - MARGIN, theme)}
   <path d="${footer.d}" fill="${theme.graphite}"/>
 </g>
 ${scanBar(W, theme)}`;

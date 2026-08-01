@@ -6,24 +6,26 @@
  */
 
 import { textPath, wrap, face, num } from '../lib/type.mjs';
-import { doc, revealDefs, revealCss, scanBar, rule } from '../lib/svg.mjs';
+import { doc, revealDefs, revealCss, scanBar, rule, SHEET } from '../lib/svg.mjs';
 
-const W = 1200;
-const H = 440;
-const MARGIN = 60;
+const W = SHEET.width;
+const H = 316;
+const MARGIN = SHEET.margin;
 
 const PLATE = { size: H, x: W - H, y: 0 };
-const COLUMN = { x: MARGIN, width: PLATE.x - MARGIN - 60 };
+const COLUMN = { x: MARGIN, width: PLATE.x - MARGIN - 36 };
 
 const BASELINE = {
-  eyebrow: 92,
-  name: [190, 272],
-  rule: 310,
-  handle: 338,
-  prose: 376,
+  eyebrow: 60,
+  name: [130, 194],
+  rule: 222,
+  handle: 246,
+  prose: 274,
 };
-const NAME_SIZE = 92;
-const PROSE_LEADING = 26;
+const NAME_SIZE = 72;
+const PROSE_SIZE = 14.5;
+const PROSE_LEADING = 21;
+const PROSE_MAX_LINES = 2;
 
 /**
  * Run-length rows -> one path in grid units, scaled by the group transform.
@@ -48,8 +50,8 @@ export function renderHeader({ theme, raster, content, index = 0 }) {
   const eyebrow = textPath({
     font: mono,
     text: content.eyebrow,
-    size: 12,
-    track: 3.4,
+    size: 11,
+    track: 2.4,
     x: COLUMN.x,
     y: BASELINE.eyebrow,
   });
@@ -73,29 +75,34 @@ export function renderHeader({ theme, raster, content, index = 0 }) {
   const handle = textPath({
     font: mono,
     text: content.handle,
-    size: 13,
-    track: 1.6,
+    size: 12.5,
+    track: 1.2,
     x: COLUMN.x,
     y: BASELINE.handle,
   });
 
-  const proseLines = wrap({
+  const wrapped = wrap({
     font: body,
     text: content.prose,
-    size: 16.5,
+    size: PROSE_SIZE,
     maxWidth: COLUMN.width,
-  }).map((line, i) =>
+  });
+  // The plate is square and pinned to the sheet height, so prose that runs long
+  // would push the layout rather than simply reflow. Fail the build instead.
+  if (wrapped.length > PROSE_MAX_LINES) {
+    throw new Error(`header prose wraps to ${wrapped.length} lines, max ${PROSE_MAX_LINES}`);
+  }
+  const proseLines = wrapped.map((line, i) =>
     textPath({
       font: body,
       text: line,
-      size: 16.5,
+      size: PROSE_SIZE,
       x: COLUMN.x,
       y: BASELINE.prose + i * PROSE_LEADING,
     })
   );
 
   const svgBody = `<defs>${revealDefs(W, H)}</defs>
-<rect width="${W}" height="${H}" fill="${theme.paper}"/>
 <g mask="url(#print-mask)">
   <path d="${eyebrow.d}" fill="${theme.graphite}"/>
   ${nameLines.map((l) => `<path d="${l.d}" fill="${theme.ink}"/>`).join('\n  ')}

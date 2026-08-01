@@ -8,17 +8,17 @@
  */
 
 import { textPath, face, num } from '../lib/type.mjs';
-import { doc, revealDefs, revealCss, scanBar } from '../lib/svg.mjs';
+import { doc, revealDefs, revealCss, scanBar, SHEET } from '../lib/svg.mjs';
 import { longDate, monthLabel, parseDay } from '../lib/format.mjs';
 
-const W = 1200;
-const H = 288;
-const MARGIN = 60;
-const GRID_X = 112;
-const GRID_TOP = 94;
+const W = SHEET.width;
+const H = 218;
+const MARGIN = SHEET.margin;
+const GRID_X = 78;
+const GRID_TOP = 74;
 const ROWS = 7;
 
-const DOT = { empty: 1.5, min: 3.0, max: 8.4 };
+const DOT = { empty: 1.1, min: 2.2, max: 6.3 };
 const WEEKDAY_LABELS = { 1: 'MON', 3: 'WED', 5: 'FRI' };
 
 /**
@@ -37,7 +37,7 @@ function percentile(values, p) {
   return sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * p))] || 1;
 }
 
-const MIN_LABEL_GAP = 44;
+const MIN_LABEL_GAP = 34;
 
 /**
  * First column of each month. The window opens mid-month, so the leading label
@@ -78,7 +78,7 @@ export function renderContributions({ theme, days, streaks, index = 0 }) {
       const cx = GRID_X + day.week * pitch + pitch / 2;
       const cy = GRID_TOP + day.weekday * pitch + pitch / 2;
       const r = radiusFor(day.count, ceiling);
-      const fill = day.count > 0 ? theme.ink : theme.ash;
+      const fill = day.count > 0 ? theme.ink : theme.ghost;
       return `<circle cx="${num(cx)}" cy="${num(cy)}" r="${num(r)}" fill="${fill}"/>`;
     })
     .join('');
@@ -86,10 +86,10 @@ export function renderContributions({ theme, days, streaks, index = 0 }) {
   const eyebrow = textPath({
     font: mono,
     text: `CONTRIBUTION FIELD — ${longDate(streaks.from)} TO ${longDate(streaks.to)}`,
-    size: 12,
-    track: 3.4,
+    size: 11,
+    track: 2.4,
     x: MARGIN,
-    y: 46,
+    y: 40,
   });
 
   const months = monthTicks(days, pitch)
@@ -98,9 +98,9 @@ export function renderContributions({ theme, days, streaks, index = 0 }) {
         font: mono,
         text: monthLabel(tick.month),
         size: 10,
-        track: 2,
+        track: 1.6,
         x: tick.x,
-        y: 84,
+        y: 64,
       });
       return `<path d="${label.d}" fill="${theme.graphite}"/>`;
     })
@@ -109,7 +109,7 @@ export function renderContributions({ theme, days, streaks, index = 0 }) {
   const weekdays = Object.entries(WEEKDAY_LABELS)
     .map(([row, label]) => {
       const y = GRID_TOP + Number(row) * pitch + pitch / 2 + 3.4;
-      const path = textPath({ font: mono, text: label, size: 10, track: 2, x: MARGIN, y });
+      const path = textPath({ font: mono, text: label, size: 10, track: 1.6, x: MARGIN, y });
       return `<path d="${path.d}" fill="${theme.graphite}"/>`;
     })
     .join('');
@@ -117,46 +117,50 @@ export function renderContributions({ theme, days, streaks, index = 0 }) {
   // Legend: the same radius ramp the field uses, so it is a key rather than decoration.
   const legendCounts = [0, 1, Math.round(ceiling * 0.25), Math.round(ceiling * 0.55), ceiling];
   const legendRight = W - MARGIN;
-  const legendSpan = legendCounts.length * 22;
-  const legendStart = legendRight - legendSpan - 46;
+  const legendPitch = 17;
+  const legendSpan = legendCounts.length * legendPitch;
+  const legendStart = legendRight - legendSpan - 42;
   const legendDots = legendCounts
     .map((count, i) => {
-      const cx = legendStart + i * 22 + 11;
+      const cx = legendStart + i * legendPitch + legendPitch / 2;
       const r = radiusFor(count, ceiling);
-      const fill = count > 0 ? theme.ink : theme.ash;
-      return `<circle cx="${num(cx)}" cy="42" r="${num(r)}" fill="${fill}"/>`;
+      const fill = count > 0 ? theme.ink : theme.ghost;
+      return `<circle cx="${num(cx)}" cy="36" r="${num(r)}" fill="${fill}"/>`;
     })
     .join('');
   const less = textPath({
     font: mono,
     text: 'LESS',
     size: 10,
-    track: 2,
+    track: 1.6,
     x: legendStart - 10,
-    y: 46,
+    y: 40,
     anchor: 'end',
   });
   const more = textPath({
     font: mono,
     text: 'MORE',
     size: 10,
-    track: 2,
+    track: 1.6,
     x: legendRight,
-    y: 46,
+    y: 40,
     anchor: 'end',
   });
 
+  if (eyebrow.width + less.width + legendSpan + more.width + 40 > W - MARGIN * 2) {
+    throw new Error(`contributions header row overflows: ${eyebrow.width.toFixed(0)}px eyebrow`);
+  }
+
   const caption = textPath({
     font: mono,
-    text: `DOT AREA IS PROPORTIONAL TO CONTRIBUTIONS THAT DAY · BUSIEST ${streaks.busiest.count} ON ${longDate(streaks.busiest.date)}`,
+    text: `DOT AREA = CONTRIBUTIONS · BUSIEST ${streaks.busiest.count} ON ${longDate(streaks.busiest.date)}`,
     size: 10,
-    track: 1.6,
+    track: 1.2,
     x: MARGIN,
-    y: 258,
+    y: 198,
   });
 
   const svgBody = `<defs>${revealDefs(W, H)}</defs>
-<rect width="${W}" height="${H}" fill="${theme.paper}"/>
 <g mask="url(#print-mask)">
   <path d="${eyebrow.d}" fill="${theme.graphite}"/>
   <path d="${less.d}" fill="${theme.ash}"/>${legendDots}<path d="${more.d}" fill="${theme.ash}"/>

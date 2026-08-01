@@ -6,18 +6,20 @@
  */
 
 import { textPath, wrap, face } from '../lib/type.mjs';
-import { doc, revealDefs, revealCss, scanBar, rule } from '../lib/svg.mjs';
+import { doc, revealDefs, revealCss, scanBar, rule, SHEET } from '../lib/svg.mjs';
 
-const W = 1200;
-const MARGIN = 60;
-const SPLIT = 470; // vertical rule between the two columns
+const W = SHEET.width;
+const MARGIN = SHEET.margin;
+const SPLIT = 330; // vertical rule between the two columns
 
-const LEFT = { x: MARGIN, width: SPLIT - MARGIN - 40 };
-const RIGHT = { x: SPLIT + 46, width: W - MARGIN - SPLIT - 46 };
+const LEFT = { x: MARGIN, width: SPLIT - MARGIN - 32 };
+const RIGHT = { x: SPLIT + 36, width: W - MARGIN - SPLIT - 36 };
 
-const CONTACT_ROW = 42;
-const NOTE_LEADING = 20;
-const NOTE_GAP = 12;
+const CONTACT_ROW = 40;
+const NOTE_SIZE = 13;
+const NOTE_LEADING = 19;
+const NOTE_GAP = 11;
+const TOP = 82; // first baseline below the header rule
 
 export function renderColophon({ theme, content, index = 0 }) {
   const mono = face.mono();
@@ -26,38 +28,41 @@ export function renderColophon({ theme, content, index = 0 }) {
 
   const contact = content.contact
     .map((entry, i) => {
-      const top = 90 + i * CONTACT_ROW;
+      const top = TOP + i * CONTACT_ROW;
       const label = textPath({
         font: mono,
         text: entry.label,
-        size: 10,
-        track: 2.2,
+        size: 9.5,
+        track: 1.8,
         x: LEFT.x,
         y: top,
       });
       const value = textPath({
         font: monoBold,
         text: entry.value,
-        size: 14,
-        track: 0.6,
+        size: 13,
+        track: 0.2,
         x: LEFT.x,
-        y: top + 20,
+        y: top + 19,
       });
+      if (value.width > LEFT.width) {
+        throw new Error(`contact "${entry.label}" overflows its column: ${value.width.toFixed(0)}px`);
+      }
       return `<path d="${label.d}" fill="${theme.ash}"/><path d="${value.d}" fill="${theme.ink}"/>`;
     })
     .join('\n  ');
 
   // Notes are laid out first so the sheet can size itself to the text.
-  let cursor = 90;
+  let cursor = TOP;
   const notes = content.notes
     .map((note) => {
-      const lines = wrap({ font: body, text: note, size: 13.5, maxWidth: RIGHT.width });
+      const lines = wrap({ font: body, text: note, size: NOTE_SIZE, maxWidth: RIGHT.width });
       const block = lines
         .map((line, i) => {
           const path = textPath({
             font: body,
             text: line,
-            size: 13.5,
+            size: NOTE_SIZE,
             x: RIGHT.x,
             y: cursor + i * NOTE_LEADING,
           });
@@ -69,33 +74,34 @@ export function renderColophon({ theme, content, index = 0 }) {
     })
     .join('\n  ');
 
-  const contactBottom = 90 + content.contact.length * CONTACT_ROW;
-  const H = Math.max(cursor - NOTE_GAP, contactBottom) + 40;
+  // Last value baseline, not the next row's origin, so the sheet does not carry
+  // an empty row's worth of trailing space.
+  const contactBottom = TOP + (content.contact.length - 1) * CONTACT_ROW + 19;
+  const H = Math.max(cursor - NOTE_GAP, contactBottom) + 28;
 
   const eyebrowLeft = textPath({
     font: mono,
     text: content.contactEyebrow,
-    size: 12,
-    track: 3.4,
+    size: 11,
+    track: 2.4,
     x: LEFT.x,
-    y: 46,
+    y: 40,
   });
   const eyebrowRight = textPath({
     font: mono,
     text: content.colophonEyebrow,
-    size: 12,
-    track: 3.4,
+    size: 11,
+    track: 2.4,
     x: RIGHT.x,
-    y: 46,
+    y: 40,
   });
 
   const svgBody = `<defs>${revealDefs(W, H)}</defs>
-<rect width="${W}" height="${H}" fill="${theme.paper}"/>
 <g mask="url(#print-mask)">
   <path d="${eyebrowLeft.d}" fill="${theme.graphite}"/>
   <path d="${eyebrowRight.d}" fill="${theme.graphite}"/>
-  ${rule(MARGIN, 62, W - MARGIN, theme)}
-  <rect x="${SPLIT}" y="62" width="1" height="${H - 96}" fill="${theme.rule}"/>
+  ${rule(MARGIN, 54, W - MARGIN, theme)}
+  <rect x="${SPLIT}" y="54" width="1" height="${H - 84}" fill="${theme.rule}"/>
   ${contact}
   ${notes}
 </g>

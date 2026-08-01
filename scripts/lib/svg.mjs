@@ -3,6 +3,19 @@
 import { xml } from './type.mjs';
 
 /**
+ * Sheet geometry.
+ *
+ * GitHub renders a profile README in a column that is roughly 830px at desktop
+ * width, and an <img> at width="100%" scales the sheet down to fit it. The
+ * canvas is therefore sized to that column rather than to a print page: at
+ * 880px the sheets land at ~0.94x, so a 12px label reads as 12px. The previous
+ * 1200px canvas was scaled to 0.69x, which is what made every label too small
+ * to read. Type sizes below are effectively rendered sizes now, not design
+ * sizes, and should be judged that way.
+ */
+export const SHEET = { width: 880, margin: 40 };
+
+/**
  * The whole sheet reveals under one descending edge. `steps()` is doing real
  * work here: a continuous wipe reads as a fade, whereas discrete advances read
  * as a print head, which is the point of the design.
