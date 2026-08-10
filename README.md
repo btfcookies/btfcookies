@@ -5,7 +5,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/btfcookies/btfcookies/main/assets/contributions-dark.svg">
-  <img alt="Contribution field: a year of daily GitHub contributions where the area of each dot is proportional to that day's contribution count." src="https://raw.githubusercontent.com/btfcookies/btfcookies/main/assets/contributions-light.svg" width="100%">
+  <img alt="Contribution field: a year of daily GitHub contributions where the area and phosphor-green glow of each dot are proportional to that day's contribution count." src="https://raw.githubusercontent.com/btfcookies/btfcookies/main/assets/contributions-light.svg" width="100%">
 </picture>
 
 <picture>
@@ -15,7 +15,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/btfcookies/btfcookies/main/assets/languages-dark.svg">
-  <img alt="Language distribution by source bytes across public repositories, drawn as a stacked bar with fill patterns instead of colours." src="https://raw.githubusercontent.com/btfcookies/btfcookies/main/assets/languages-light.svg" width="100%">
+  <img alt="Language distribution by source bytes across public repositories, drawn as a stacked bar colour-coded by language." src="https://raw.githubusercontent.com/btfcookies/btfcookies/main/assets/languages-light.svg" width="100%">
 </picture>
 
 <picture>
@@ -25,5 +25,5 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/btfcookies/btfcookies/main/assets/colophon-dark.svg">
-  <img alt="Elsewhere — email lawrence@reamus.app, Discord btf_cookies, Eightbit Labs at eightbitlabs.netlify.app. Colophon — generated from live GitHub data and refreshed daily. The constraint is no colour: volume is dot area, category is fill pattern, the avatar is dithered to one bit. Archivo Black and IBM Plex, baked to outlines." src="https://raw.githubusercontent.com/btfcookies/btfcookies/main/assets/colophon-light.svg" width="100%">
+  <img alt="Elsewhere — email lawrence@reamus.app, Discord btf_cookies, Eightbit Labs at eightbitlabs.netlify.app. Colophon — generated from live GitHub data and refreshed daily. Six terminal panes, one palette: volume is still dot area and glow, category is colour now instead of pattern. Archivo Black and IBM Plex, baked to outlines; the avatar dithered to one bit and lit phosphor green." src="https://raw.githubusercontent.com/btfcookies/btfcookies/main/assets/colophon-light.svg" width="100%">
 </picture>

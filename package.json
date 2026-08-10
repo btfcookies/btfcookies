@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Generates the monochrome sheets rendered in the GitHub profile README.",
+  "description": "Generates the terminal-window sheets rendered in the GitHub profile README.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/btfcookies/btfcookies.git"

@@ -58,7 +58,7 @@ export const COLOPHON = {
   colophonEyebrow: 'COLOPHON',
   notes: [
     'Generated from live GitHub data and refreshed daily.',
-    'The constraint is no colour: volume is dot area, category is fill pattern, the avatar is dithered to one bit.',
-    'Archivo Black and IBM Plex, baked to outlines.',
+    'Six terminal panes, one palette: volume is still dot area and glow, category is colour now instead of pattern.',
+    'Archivo Black and IBM Plex, baked to outlines; the avatar dithered to one bit and lit phosphor green.',
   ],
 };

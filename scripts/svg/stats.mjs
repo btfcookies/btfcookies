@@ -3,10 +3,14 @@
  *
  * Four figures, each with the context needed to read it honestly - a streak of
  * zero says when the last active day was rather than hiding behind the number.
+ * Each cell gets its own accent from the terminal's four-colour rotation, the
+ * way a status line assigns a colour per field rather than printing everything
+ * in one tone.
  */
 
 import { textPath, face } from '../lib/type.mjs';
-import { doc, revealDefs, revealCss, scanBar, rule, SHEET } from '../lib/svg.mjs';
+import { doc, revealDefs, revealCss, scanBar, windowChrome, SHEET } from '../lib/svg.mjs';
+import { accent } from '../lib/theme.mjs';
 import { longDate, monthYear, group, percent } from '../lib/format.mjs';
 
 const W = SHEET.width;
@@ -66,7 +70,7 @@ export function renderStats({ theme, days, streaks, profile, repos, index = 0 })
 
   const cellWidth = (W - MARGIN * 2) / CELLS;
   const body = cells
-    .map((cell) => {
+    .map((cell, i) => {
       const label = textPath({
         font: mono,
         text: cell.label,
@@ -97,7 +101,7 @@ export function renderStats({ theme, days, streaks, profile, repos, index = 0 })
       if (widest > cellWidth - 24) {
         throw new Error(`stats cell "${cell.label}" overflows: ${widest.toFixed(0)}px of ${cellWidth - 24}px`);
       }
-      return `<path d="${label.d}" fill="${theme.graphite}"/><path d="${value.d}" fill="${theme.ink}"/><path d="${note.d}" fill="${theme.ash}"/>`;
+      return `<path d="${label.d}" fill="${theme.muted}"/><path d="${value.d}" fill="${accent(theme, i)}"/><path d="${note.d}" fill="${theme.faint}"/>`;
     })
     .join('\n  ');
 
@@ -105,7 +109,7 @@ export function renderStats({ theme, days, streaks, profile, repos, index = 0 })
     .slice(1)
     .map(
       (cell) =>
-        `<rect x="${cell.x - 16}" y="${DIVIDER.top}" width="1" height="${DIVIDER.bottom - DIVIDER.top}" fill="${theme.rule}"/>`
+        `<rect x="${cell.x - 16}" y="${DIVIDER.top}" width="1" height="${DIVIDER.bottom - DIVIDER.top}" fill="${theme.border}"/>`
     )
     .join('');
 
@@ -127,17 +131,25 @@ export function renderStats({ theme, days, streaks, profile, repos, index = 0 })
 <g mask="url(#print-mask)">
   ${body}
   ${dividers}
-  ${rule(MARGIN, 148, W - MARGIN, theme)}
-  <path d="${footer.d}" fill="${theme.graphite}"/>
+  <rect x="${MARGIN}" y="148" width="${W - MARGIN * 2}" height="1" fill="${theme.border}"/>
+  <path d="${footer.d}" fill="${theme.muted}"/>
 </g>
 ${scanBar(W, theme)}`;
 
+  const { height, markup } = windowChrome({
+    width: W,
+    contentHeight: H,
+    theme,
+    titleLabel: 'guest@btfcookies:~$ neofetch --stats',
+    body: svgBody,
+  });
+
   return doc({
     width: W,
-    height: H,
+    height,
     title: `Streaks and totals: ${streaks.current} day current streak, ${streaks.longest} day longest streak, ${streaks.total} contributions`,
     desc: `${cells.map((c) => `${c.label}: ${c.value} (${c.note})`).join('. ')}. ${footerText.replace(/\s+·\s+/g, ', ')}.`,
-    body: svgBody,
+    body: markup,
     css: revealCss(H, index),
   });
 }

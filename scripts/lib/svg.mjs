@@ -1,6 +1,6 @@
-/** Shared SVG document scaffolding and the top-down print reveal. */
+/** Shared SVG document scaffolding, terminal window chrome, and the boot-scan reveal. */
 
-import { xml } from './type.mjs';
+import { xml, textPath, face } from './type.mjs';
 
 /**
  * Sheet geometry.
@@ -52,7 +52,11 @@ export function revealDefs(width, height, id = 'print') {
 </linearGradient>
 <mask id="${id}-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="${width}" height="${height}">
 <rect class="wipe" x="0" y="${-maskH}" width="${width}" height="${maskH}" fill="url(#${id}-edge)"/>
-</mask>`;
+</mask>
+<filter id="${id}-glow" x="-20%" y="-200%" width="140%" height="500%">
+<feGaussianBlur in="SourceGraphic" stdDeviation="2.2" result="blur"/>
+<feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+</filter>`;
 }
 
 /**
@@ -84,9 +88,9 @@ ${freezeCss(duration)}
 @media(prefers-reduced-motion:reduce){.wipe,.scan{animation:none}.scan{opacity:0}}`;
 }
 
-/** The bar that rides the leading edge of the reveal. */
-export function scanBar(width, theme) {
-  return `<g class="scan" opacity="0"><rect x="0" y="-2" width="${width}" height="2" fill="${theme.ink}"/><rect x="0" y="0" width="${width}" height="10" fill="${theme.ink}" opacity="0.06"/></g>`;
+/** The phosphor bar that rides the leading edge of the reveal, like a CRT scanning in. */
+export function scanBar(width, theme, id = 'print') {
+  return `<g class="scan" opacity="0" filter="url(#${id}-glow)"><rect x="0" y="-1.5" width="${width}" height="1.5" fill="${theme.green}"/><rect x="0" y="0" width="${width}" height="14" fill="${theme.green}" opacity="0.08"/></g>`;
 }
 
 export function doc({ width, height, title, desc, body, css = '' }) {
@@ -101,5 +105,70 @@ ${body}
 
 /** Hairline rule. */
 export function rule(x1, y, x2, theme, opacity = 1) {
-  return `<rect x="${x1}" y="${y}" width="${x2 - x1}" height="1" fill="${theme.rule}" opacity="${opacity}"/>`;
+  return `<rect x="${x1}" y="${y}" width="${x2 - x1}" height="1" fill="${theme.border}" opacity="${opacity}"/>`;
+}
+
+/**
+ * Terminal window chrome.
+ *
+ * Every sheet is a self-contained widget now, not a bare print on the page,
+ * so it needs to look like a real window: a rounded card, a title bar with
+ * the three stoplight dots, and a label that names the command whose output
+ * the pane is showing rather than a generic caption. The clip path is what
+ * keeps the title bar's square top corners from poking out past the card's
+ * rounded ones - drawn separately they'd fight; clipped together they read
+ * as one shape.
+ */
+export const CHROME = { radius: 14, titleBar: 38, padBottom: 24 };
+
+function trafficLights(theme, chromeH) {
+  const cy = chromeH / 2;
+  return [
+    { x: 22, fill: theme.red },
+    { x: 40, fill: theme.amber },
+    { x: 58, fill: theme.green },
+  ]
+    .map((d) => `<circle cx="${d.x}" cy="${cy}" r="5" fill="${d.fill}"/>`)
+    .join('');
+}
+
+/**
+ * Wrap a sheet's already-composed body in a terminal window.
+ *
+ * @param {number} contentHeight  the height the generator laid its own body
+ *   out against - untouched, so none of its internal baselines need to change
+ * @param {string} titleLabel     the "command" printed in the title bar
+ */
+export function windowChrome({ width, contentHeight, theme, titleLabel, body, id = 'win' }) {
+  const chromeH = CHROME.titleBar;
+  const height = chromeH + contentHeight + CHROME.padBottom;
+  const r = CHROME.radius;
+
+  const label = textPath({
+    font: face.mono(),
+    text: titleLabel,
+    size: 11.5,
+    track: 0.8,
+    x: width / 2,
+    y: chromeH / 2 + 4,
+    anchor: 'middle',
+  });
+
+  const markup = `<defs>
+<clipPath id="${id}-clip"><rect x="0" y="0" width="${width}" height="${height}" rx="${r}" ry="${r}"/></clipPath>
+<filter id="${id}-shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="${theme.shadow}"/></filter>
+</defs>
+<g filter="url(#${id}-shadow)">
+<g clip-path="url(#${id}-clip)">
+  <rect x="0" y="0" width="${width}" height="${height}" fill="${theme.bg}"/>
+  <rect x="0" y="0" width="${width}" height="${chromeH}" fill="${theme.panel}"/>
+  <rect x="0" y="${chromeH - 1}" width="${width}" height="1" fill="${theme.border}"/>
+  ${trafficLights(theme, chromeH)}
+  <path d="${label.d}" fill="${theme.muted}"/>
+  <g transform="translate(0 ${chromeH})">${body}</g>
+</g>
+<rect x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="${r}" ry="${r}" fill="none" stroke="${theme.border}"/>
+</g>`;
+
+  return { height, markup };
 }

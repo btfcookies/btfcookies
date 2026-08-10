@@ -1,12 +1,13 @@
 /**
- * Header sheet: identity in the left margin, the 1-bit raster as a plate that
- * bleeds off three edges on the right. One print edge travels top to bottom
- * and reveals both halves, so the sheet reads as a single pass of one machine
- * rather than two boxes side by side.
+ * Header sheet: a terminal window whose title bar is the command that
+ * produced everything below it. Identity sits in the left column, the
+ * dithered avatar bleeds off the plate on the right as a phosphor-green
+ * raster instead of a print plate - same bitmap, now lit like a CRT instead
+ * of inked on paper.
  */
 
 import { textPath, wrap, face, num } from '../lib/type.mjs';
-import { doc, revealDefs, revealCss, scanBar, rule, SHEET } from '../lib/svg.mjs';
+import { doc, revealDefs, revealCss, scanBar, rule, windowChrome, SHEET } from '../lib/svg.mjs';
 
 const W = SHEET.width;
 const H = 316;
@@ -56,6 +57,7 @@ export function renderHeader({ theme, raster, content, index = 0 }) {
     y: BASELINE.eyebrow,
   });
 
+  const nameFills = [theme.ink, theme.green];
   const nameLines = content.name.map((line, i) =>
     textPath({
       font: display,
@@ -104,21 +106,29 @@ export function renderHeader({ theme, raster, content, index = 0 }) {
 
   const svgBody = `<defs>${revealDefs(W, H)}</defs>
 <g mask="url(#print-mask)">
-  <path d="${eyebrow.d}" fill="${theme.graphite}"/>
-  ${nameLines.map((l) => `<path d="${l.d}" fill="${theme.ink}"/>`).join('\n  ')}
+  <path d="${eyebrow.d}" fill="${theme.muted}"/>
+  ${nameLines.map((l, i) => `<path d="${l.d}" fill="${nameFills[i]}"/>`).join('\n  ')}
   ${rule(COLUMN.x, BASELINE.rule, COLUMN.x + COLUMN.width, theme)}
-  <path d="${handle.d}" fill="${theme.ink}"/>
-  ${proseLines.map((l) => `<path d="${l.d}" fill="${theme.graphite}"/>`).join('\n  ')}
-  <g transform="translate(${PLATE.x} ${PLATE.y}) scale(${num(PLATE.size / raster.size, 6)})"><path d="${platePath(raster)}" fill="${theme.ink}" shape-rendering="crispEdges"/></g>
+  <path d="${handle.d}" fill="${theme.cyan}"/>
+  ${proseLines.map((l) => `<path d="${l.d}" fill="${theme.muted}"/>`).join('\n  ')}
+  <g transform="translate(${PLATE.x} ${PLATE.y}) scale(${num(PLATE.size / raster.size, 6)})" filter="url(#print-glow)"><path d="${platePath(raster)}" fill="${theme.green}" shape-rendering="crispEdges"/></g>
 </g>
 ${scanBar(W, theme)}`;
 
+  const { height, markup } = windowChrome({
+    width: W,
+    contentHeight: H,
+    theme,
+    titleLabel: 'guest@btfcookies:~$ whoami',
+    body: svgBody,
+  });
+
   return doc({
     width: W,
-    height: H,
+    height,
     title: `${content.name.join(' ')} — ${content.eyebrow}`,
-    desc: `${content.prose} Handle: ${content.handle}. Alongside, the profile avatar rendered as a ${raster.size} by ${raster.size} one-bit Atkinson-dithered plate that prints from top to bottom.`,
-    body: svgBody,
+    desc: `${content.prose} Handle: ${content.handle}. Alongside, the profile avatar rendered as a ${raster.size} by ${raster.size} one-bit Atkinson-dithered plate, lit phosphor green and printed from top to bottom.`,
+    body: markup,
     css: revealCss(H, index),
   });
 }

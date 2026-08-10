@@ -1,14 +1,15 @@
 /**
  * Contribution field.
  *
- * GitHub encodes daily volume as colour. A monochrome sheet has no hue to
- * spend, so volume is encoded as dot area instead - the same substitution the
- * avatar plate makes, applied to data rather than an image. Empty days stay on
- * the grid as hairline dots so the shape of the year is still legible.
+ * GitHub encodes daily volume as colour; here it is encoded twice over - dot
+ * area and phosphor-green intensity both grow with the day's count, so the
+ * field reads at a glance the way the real contribution graph does, just lit
+ * like a terminal instead of painted in GitHub's own green scale. Empty days
+ * stay on the grid as hairline dots so the shape of the year is still legible.
  */
 
 import { textPath, face, num } from '../lib/type.mjs';
-import { doc, revealDefs, revealCss, scanBar, SHEET } from '../lib/svg.mjs';
+import { doc, revealDefs, revealCss, scanBar, windowChrome, SHEET } from '../lib/svg.mjs';
 import { longDate, monthLabel, parseDay } from '../lib/format.mjs';
 
 const W = SHEET.width;
@@ -19,16 +20,21 @@ const GRID_TOP = 74;
 const ROWS = 7;
 
 const DOT = { empty: 1.1, min: 2.2, max: 6.3 };
+const GLOW = { min: 0.32, max: 1 };
 const WEEKDAY_LABELS = { 1: 'MON', 3: 'WED', 5: 'FRI' };
 
-/**
- * Area proportional to count, with the scale set by the 95th percentile so a
- * single outlier day cannot flatten the rest of the year into specks.
- */
-function radiusFor(count, ceiling) {
-  if (count <= 0) return DOT.empty;
-  const norm = Math.min(1, Math.sqrt(count / ceiling));
-  return DOT.min + (DOT.max - DOT.min) * norm;
+/** 0..1 activity norm, scaled by the 95th percentile so one outlier day can't flatten the rest. */
+function normFor(count, ceiling) {
+  if (count <= 0) return 0;
+  return Math.min(1, Math.sqrt(count / ceiling));
+}
+
+function radiusFor(norm) {
+  return norm <= 0 ? DOT.empty : DOT.min + (DOT.max - DOT.min) * norm;
+}
+
+function glowFor(norm) {
+  return GLOW.min + (GLOW.max - GLOW.min) * norm;
 }
 
 function percentile(values, p) {
@@ -77,9 +83,10 @@ export function renderContributions({ theme, days, streaks, index = 0 }) {
     .map((day) => {
       const cx = GRID_X + day.week * pitch + pitch / 2;
       const cy = GRID_TOP + day.weekday * pitch + pitch / 2;
-      const r = radiusFor(day.count, ceiling);
-      const fill = day.count > 0 ? theme.ink : theme.ghost;
-      return `<circle cx="${num(cx)}" cy="${num(cy)}" r="${num(r)}" fill="${fill}"/>`;
+      const norm = normFor(day.count, ceiling);
+      const r = radiusFor(norm);
+      if (day.count <= 0) return `<circle cx="${num(cx)}" cy="${num(cy)}" r="${num(r)}" fill="${theme.dim}"/>`;
+      return `<circle cx="${num(cx)}" cy="${num(cy)}" r="${num(r)}" fill="${theme.green}" opacity="${num(glowFor(norm), 2)}"/>`;
     })
     .join('');
 
@@ -102,7 +109,7 @@ export function renderContributions({ theme, days, streaks, index = 0 }) {
         x: tick.x,
         y: 64,
       });
-      return `<path d="${label.d}" fill="${theme.graphite}"/>`;
+      return `<path d="${label.d}" fill="${theme.muted}"/>`;
     })
     .join('');
 
@@ -110,11 +117,11 @@ export function renderContributions({ theme, days, streaks, index = 0 }) {
     .map(([row, label]) => {
       const y = GRID_TOP + Number(row) * pitch + pitch / 2 + 3.4;
       const path = textPath({ font: mono, text: label, size: 10, track: 1.6, x: MARGIN, y });
-      return `<path d="${path.d}" fill="${theme.graphite}"/>`;
+      return `<path d="${path.d}" fill="${theme.muted}"/>`;
     })
     .join('');
 
-  // Legend: the same radius ramp the field uses, so it is a key rather than decoration.
+  // Legend: the same radius/glow ramp the field uses, so it is a key rather than decoration.
   const legendCounts = [0, 1, Math.round(ceiling * 0.25), Math.round(ceiling * 0.55), ceiling];
   const legendRight = W - MARGIN;
   const legendPitch = 17;
@@ -123,9 +130,11 @@ export function renderContributions({ theme, days, streaks, index = 0 }) {
   const legendDots = legendCounts
     .map((count, i) => {
       const cx = legendStart + i * legendPitch + legendPitch / 2;
-      const r = radiusFor(count, ceiling);
-      const fill = count > 0 ? theme.ink : theme.ghost;
-      return `<circle cx="${num(cx)}" cy="36" r="${num(r)}" fill="${fill}"/>`;
+      const norm = normFor(count, ceiling);
+      const r = radiusFor(norm);
+      const fill = count > 0 ? theme.green : theme.dim;
+      const opacity = count > 0 ? num(glowFor(norm), 2) : 1;
+      return `<circle cx="${num(cx)}" cy="36" r="${num(r)}" fill="${fill}" opacity="${opacity}"/>`;
     })
     .join('');
   const less = textPath({
@@ -153,7 +162,7 @@ export function renderContributions({ theme, days, streaks, index = 0 }) {
 
   const caption = textPath({
     font: mono,
-    text: `DOT AREA = CONTRIBUTIONS · BUSIEST ${streaks.busiest.count} ON ${longDate(streaks.busiest.date)}`,
+    text: `DOT AREA + GLOW = CONTRIBUTIONS · BUSIEST ${streaks.busiest.count} ON ${longDate(streaks.busiest.date)}`,
     size: 10,
     track: 1.2,
     x: MARGIN,
@@ -162,21 +171,29 @@ export function renderContributions({ theme, days, streaks, index = 0 }) {
 
   const svgBody = `<defs>${revealDefs(W, H)}</defs>
 <g mask="url(#print-mask)">
-  <path d="${eyebrow.d}" fill="${theme.graphite}"/>
-  <path d="${less.d}" fill="${theme.ash}"/>${legendDots}<path d="${more.d}" fill="${theme.ash}"/>
+  <path d="${eyebrow.d}" fill="${theme.muted}"/>
+  <path d="${less.d}" fill="${theme.faint}"/>${legendDots}<path d="${more.d}" fill="${theme.faint}"/>
   ${months}
   ${weekdays}
   ${dots}
-  <path d="${caption.d}" fill="${theme.ash}"/>
+  <path d="${caption.d}" fill="${theme.faint}"/>
 </g>
 ${scanBar(W, theme)}`;
 
+  const { height, markup } = windowChrome({
+    width: W,
+    contentHeight: H,
+    theme,
+    titleLabel: 'guest@btfcookies:~$ contributions --calendar',
+    body: svgBody,
+  });
+
   return doc({
     width: W,
-    height: H,
+    height,
     title: `Contribution field: ${streaks.total} contributions from ${longDate(streaks.from)} to ${longDate(streaks.to)}`,
-    desc: `A ${weeks}-week grid of daily GitHub contributions where the area of each dot is proportional to that day's contribution count. ${streaks.activeDays} of ${days.length} days were active. The busiest day was ${longDate(streaks.busiest.date)} with ${streaks.busiest.count} contributions.`,
-    body: svgBody,
+    desc: `A ${weeks}-week grid of daily GitHub contributions where the area and glow of each dot are proportional to that day's contribution count. ${streaks.activeDays} of ${days.length} days were active. The busiest day was ${longDate(streaks.busiest.date)} with ${streaks.busiest.count} contributions.`,
+    body: markup,
     css: revealCss(H, index),
   });
 }

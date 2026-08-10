@@ -1,14 +1,13 @@
 /**
- * Project index.
- *
- * Set as a catalogue rather than a card grid: names in the mono voice the rest
- * of the sheets use for labels, one hairline per row, and the address in the
- * right margin where a reference would sit. An image cannot carry a link, so
- * each address is printed in full and repeated in the alt text.
+ * Project index, styled like a colourised directory listing: names in the
+ * green a shell gives executables, addresses in the cyan it gives links.
+ * One hairline per row, and the address in the right margin where a
+ * reference would sit. An image cannot carry a link, so each address is
+ * printed in full and repeated in the alt text.
  */
 
 import { textPath, face, measure } from '../lib/type.mjs';
-import { doc, revealDefs, revealCss, scanBar, rule, SHEET } from '../lib/svg.mjs';
+import { doc, revealDefs, revealCss, scanBar, windowChrome, SHEET } from '../lib/svg.mjs';
 
 const W = SHEET.width;
 const MARGIN = SHEET.margin;
@@ -91,25 +90,33 @@ export function renderProjects({ theme, content, index = 0 }) {
         throw new Error(`project row "${row.name}" collides with its address`);
       }
 
-      const divider = i === 0 ? '' : rule(MARGIN, top, W - MARGIN, theme);
-      return `${divider}<path d="${name.d}" fill="${theme.ink}"/><path d="${blurb.d}" fill="${theme.graphite}"/><path d="${url.d}" fill="${theme.ash}"/>`;
+      const divider = i === 0 ? '' : `<rect x="${MARGIN}" y="${top}" width="${W - MARGIN * 2}" height="1" fill="${theme.border}"/>`;
+      return `${divider}<path d="${name.d}" fill="${theme.green}"/><path d="${blurb.d}" fill="${theme.muted}"/><path d="${url.d}" fill="${theme.cyan}"/>`;
     })
     .join('\n  ');
 
   const svgBody = `<defs>${revealDefs(W, H)}</defs>
 <g mask="url(#print-mask)">
-  <path d="${eyebrow.d}" fill="${theme.graphite}"/>
-  <path d="${count.d}" fill="${theme.ash}"/>
+  <path d="${eyebrow.d}" fill="${theme.muted}"/>
+  <path d="${count.d}" fill="${theme.faint}"/>
   ${rows}
 </g>
 ${scanBar(W, theme)}`;
 
+  const { height, markup } = windowChrome({
+    width: W,
+    contentHeight: H,
+    theme,
+    titleLabel: 'guest@btfcookies:~$ ls -la ~/projects',
+    body: svgBody,
+  });
+
   return doc({
     width: W,
-    height: H,
+    height,
     title: `Selected work: ${content.rows.map((r) => r.name).join(', ')}`,
     desc: content.rows.map((r) => `${r.name} (${r.url}): ${r.blurb}`).join(' '),
-    body: svgBody,
+    body: markup,
     css: revealCss(H, index),
   });
 }
