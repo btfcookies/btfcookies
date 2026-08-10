@@ -2,14 +2,15 @@
 
 Head Developer, Eightbit Labs · `@btfcookies` · cookiemonster
 
+## Bio
+
 Developer tools and Discord bots. Occasionally a PDF API or a cryptocurrency.
 
-```
-guest@btfcookies:~$ whoami
-lawrence tong — head developer, eightbit labs
-```
+<table>
+<tr>
+<td width="50%" valign="top">
 
-## Stats
+### Stats
 
 | | |
 | --- | --- |
@@ -20,21 +21,51 @@ lawrence tong — head developer, eightbit labs
 | **Public repositories** | 25 |
 | **Followers** | 10 |
 
-## Stack
+</td>
+<td width="50%" valign="top">
 
-`JavaScript` · `TypeScript` · `HTML` · `CSS` · `C#` · `Node.js` · `Discord.js`
+### Stack
 
-## Languages
+`JavaScript`
+`TypeScript`
+`HTML`
+`CSS`
+`C#`
+`Node.js`
+`Discord.js`
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### Languages
 
 | | | |
 | --- | --- | --- |
-| JavaScript | `████████████░░░░░░░░` | 60% |
-| HTML | `███░░░░░░░░░░░░░░░░░` | 14% |
-| CSS | `███░░░░░░░░░░░░░░░░░` | 13% |
-| TypeScript | `██░░░░░░░░░░░░░░░░░░` | 10% |
-| C# | `█░░░░░░░░░░░░░░░░░░░` | 2% |
+| JavaScript | `███████░░░░░` | 60% |
+| HTML | `██░░░░░░░░░░` | 14% |
+| CSS | `██░░░░░░░░░░` | 13% |
+| TypeScript | `█░░░░░░░░░░░` | 10% |
+| C# | `█░░░░░░░░░░░` | 2% |
 
-## Selected work
+</td>
+<td width="50%" valign="top">
+
+### Elsewhere
+
+| | |
+| --- | --- |
+| **Email** | [lawrence@reamus.app](mailto:lawrence@reamus.app) |
+| **Discord** | btf_cookies |
+| **Eightbit Labs** | [eightbitlabs.netlify.app](https://eightbitlabs.netlify.app) |
+
+</td>
+</tr>
+<tr>
+<td colspan="2">
+
+### Selected work
 
 | Project | What it is | Link |
 | --- | --- | --- |
@@ -45,10 +76,6 @@ lawrence tong — head developer, eightbit labs
 | **Zep** | A general-purpose Discord bot. | [wbrous/zep](https://github.com/wbrous/zep) |
 | **Cortis** | A messaging app for developers. | not released |
 
-## Elsewhere
-
-| | |
-| --- | --- |
-| **Email** | [lawrence@reamus.app](mailto:lawrence@reamus.app) |
-| **Discord** | btf_cookies |
-| **Eightbit Labs** | [eightbitlabs.netlify.app](https://eightbitlabs.netlify.app) |
+</td>
+</tr>
+</table>
