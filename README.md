@@ -1,6 +1,6 @@
 # Lawrence Tong
 
-Head Developer, Eightbit Labs · `@btfcookies` · cookiemonster
+Head Developer, Eightbit Labs · reformed vibe coder · cookiemonster
 
 ## Bio
 
