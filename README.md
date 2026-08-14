@@ -12,14 +12,15 @@ Developer tools and Discord bots. Occasionally a PDF API or a cryptocurrency.
 
 ### Stats
 
-| | |
-| --- | --- |
-| **Current streak** | 4 days |
-| **Longest streak** | 22 days |
-| **Contributions, 12 mo** | 874 |
-| **Active days** | 163 / 366 |
-| **Public repositories** | 25 |
-| **Followers** | 10 |
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=btfcookies&show_icons=true&hide_border=true&theme=dark">
+  <img src="https://github-readme-stats.vercel.app/api?username=btfcookies&show_icons=true&hide_border=true&theme=default" alt="btfcookies's GitHub stats" width="100%">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com?user=btfcookies&hide_border=true&theme=dark">
+  <img src="https://streak-stats.demolab.com?user=btfcookies&hide_border=true&theme=default" alt="btfcookies's GitHub streak" width="100%">
+</picture>
 
 </td>
 <td width="50%" valign="top">
@@ -41,13 +42,10 @@ Developer tools and Discord bots. Occasionally a PDF API or a cryptocurrency.
 
 ### Languages
 
-| | | |
-| --- | --- | --- |
-| JavaScript | `███████░░░░░` | 60% |
-| HTML | `██░░░░░░░░░░` | 14% |
-| CSS | `██░░░░░░░░░░` | 13% |
-| TypeScript | `█░░░░░░░░░░░` | 10% |
-| C# | `█░░░░░░░░░░░` | 2% |
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=btfcookies&layout=compact&hide_border=true&theme=dark">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=btfcookies&layout=compact&hide_border=true&theme=default" alt="btfcookies's most used languages" width="100%">
+</picture>
 
 </td>
 <td width="50%" valign="top">
@@ -59,6 +57,7 @@ Developer tools and Discord bots. Occasionally a PDF API or a cryptocurrency.
 | **Email** | [lawrence@reamus.app](mailto:lawrence@reamus.app) |
 | **Discord** | btf_cookies |
 | **Eightbit Labs** | [eightbitlabs.netlify.app](https://eightbitlabs.netlify.app) |
+| **Followers** | ![followers](https://img.shields.io/github/followers/btfcookies?label=&style=social) |
 
 </td>
 </tr>
