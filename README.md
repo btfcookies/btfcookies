@@ -73,7 +73,7 @@ Developer tools and Discord bots. Occasionally a PDF API or a cryptocurrency.
 | **TAD Coin** | A coin named after Terry A. Davis. | [tad-coin.netlify.app](https://tad-coin.netlify.app) |
 | **QB Reader** | Quiz bowl practice. I do the web client. | [qbreader/website](https://github.com/qbreader/website) |
 | **Zep** | A general-purpose Discord bot. | [wbrous/zep](https://github.com/wbrous/zep) |
-| **Cortis** | A messaging app for developers. | not released |
+| **Stars** | A set of scripts that use the lightkurve library to plot data from the TESS and Kepler telescopes. | [stars](https://github.com/btfcookies/stars) |
 
 </td>
 </tr>
