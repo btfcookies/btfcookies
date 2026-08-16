@@ -13,8 +13,8 @@ Developer tools and Discord bots. Occasionally a PDF API or a cryptocurrency.
 ### Stats
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=btfcookies&show_icons=true&hide_border=true&theme=dark">
-  <img src="https://github-readme-stats.vercel.app/api?username=btfcookies&show_icons=true&hide_border=true&theme=default" alt="btfcookies's GitHub stats" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=btfcookies&theme=github_dark">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=btfcookies&theme=github" alt="btfcookies's GitHub stats" width="100%">
 </picture>
 
 <picture>
@@ -43,8 +43,8 @@ Developer tools and Discord bots. Occasionally a PDF API or a cryptocurrency.
 ### Languages
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=btfcookies&layout=compact&hide_border=true&theme=dark">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=btfcookies&layout=compact&hide_border=true&theme=default" alt="btfcookies's most used languages" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=btfcookies&theme=github_dark">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=btfcookies&theme=github" alt="btfcookies's most used languages" width="100%">
 </picture>
 
 </td>
